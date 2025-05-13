@@ -1,0 +1,18 @@
+# Crear usuario
+usuario = User(nombre="heber")
+usuario.save()
+print(f"Usuario creado: {usuario.id} - {usuario.nombre}")
+
+# Obtener usuario por ID
+usuario = User.get(id=1)
+print(f"Usuario obtenido: {usuario.id} - {usuario.nombre}")
+
+# Filtrar usuarios
+usuarios = User.filter(nombre="heber")
+for user in usuarios:
+    print(f"Usuario: {user.id} - {user.nombre}")
+
+# Obtener todos los usuarios
+todos = User.all()
+for user in todos:
+    print(f"Usuario: {user.id} - {user.nombre}")
