@@ -2,17 +2,21 @@ import requests
 import json
 import os
 
+
+DEBUG=True
+
+
 def clear_console():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 if __name__ == '__main__':
     url = 'http://127.0.0.1:5000'
-    admin = False
+    admin = True if DEBUG else False
     salir = False
     id = 0
     while not salir:
-        clear_console()  # Limpiar consola al iniciar el menú
-        opc = int(input('\t0. Salir\n\t1. Iniciar session\n\t2. Prueba\n\t3. Crear Usuario\n\tOpcion: '))
+        clear_console()
+        opc = int(input('\t0. Salir\n\t1. Iniciar session\n\t2. Prueba\n\t3. Crear Usuario\n\t4. Eliminar usuario\n\t5. Cerrar session\n\tOpcion: '))
         
         if opc == 0:
             clear_console()
@@ -32,7 +36,7 @@ if __name__ == '__main__':
             if response.status_code == 200:
                 data = response.json()
                 id=data['id']
-                print(f"Inicio de sesión exitoso:\nID: {data['id']}\nNombre: {data['nombre']}")
+                print(f"Inicio de sesión exitoso\n\t* ID: {data['id']}\n\t* Nombre: {data['nombre']}")
             else:
                 print("Error:", response.text)
             
@@ -84,5 +88,13 @@ if __name__ == '__main__':
                 print("Error: El usuario no existe.")
             else:
                 print("Error:", response.text)
+
+            input("\nPresiona Enter para continuar...")
+        
+        elif opc == 5:
+            clear_console()
+            print('Cerrar session')
+            
+            id=0
 
             input("\nPresiona Enter para continuar...")

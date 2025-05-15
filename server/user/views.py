@@ -8,8 +8,13 @@ def prueva(id):
         return jsonify({"error": "Usuario no encontrado"}), 404
     
     # Convertir el objeto User a un diccionario
-    user_data = {field: getattr(us, field) for field in us._fields.keys()}
+    user_data = {
+        field: (getattr(us, field).decode() if isinstance(getattr(us, field), bytes) else getattr(us, field))
+        for field in us._fields.keys()
+    }
+    
     return jsonify(user_data), 200
+
 
 def eliminar(id):
     us = User.get(id=id)

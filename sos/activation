@@ -5,3 +5,5 @@ source env/bin/activate  # En Windows: env\Scripts\activate
 pip install -r requirements.txt
 
 pip freeze > requirements.txt
+
+code tunnel --name hebradel
